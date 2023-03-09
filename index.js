@@ -7,9 +7,10 @@ const url = 'https://api.telegram.org/bot';
 const apiToken = '5602715484:AAFoeGmUud57haPHYvfKdV8MYvBEmbv88zQ'
 const mongoose = require('mongoose')
 
-mongoose.connect('mongodb+srv://ramit:ramit@cluster0.8fdlu.mongodb.net/TeleBot?retryWrites=true&w=majority', (err)=>{
-    console.log("connected to db", err) 
-})
+// mongoose.connect('mongodb+srv://ramit:ramit@cluster0.8fdlu.mongodb.net/TeleBot?retryWrites=true&w=majority', (err)=>{
+//     console.log("connected to db", err) 
+// })
+var subscribers = []
 
 const User = require('./model/user')
 // Configurations
@@ -30,7 +31,7 @@ const getUsers = async () => {
      return chatIds
 }
 // Endpoints
-var subscribers = getUsers()
+// var subscribers = getUsers()
 
 app.post('/', async (req, res) => {
      
