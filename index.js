@@ -32,6 +32,7 @@ app.post('/', (req, res) => {
      const sentMessage = req.body.message.text;
      // Regex for hello
      const users = getUsers(chatId)
+     console.log(users, "--------------------")
      const subscribers = users.subscribers
      if (sentMessage == "subscribe") {
         var text = ""
