@@ -15,7 +15,7 @@ const User = require('./model/user')
 // Configurations
 app.use(bodyParser.json());
 
-const getUsers = async (chatId) => {
+const getUsers = async () => {
     let users
     try{
         users = await User.find()
@@ -32,7 +32,7 @@ app.post('/', async (req, res) => {
      const chatId = req.body.message.chat.id;
      const sentMessage = req.body.message.text;
      // Regex for hello
-     const users = getUsers(chatId)
+     const users = getUsers()
      console.log(users, "--------------------")
      const subscribers = await users.subscribers
      if (sentMessage == "subscribe") {
@@ -103,6 +103,8 @@ const getiPhone14Price = async () => {
   const sendiPhone14PriceUpdate = async () => {
     const price = await getiPhone14Price();
     const message = `📱 iPhone14 Price Update 📱\n\nThe latest price is $${price}.`;
+    const users = getUsers()
+    const subscribers = users.subscribers
     subscribers.forEach((chatId) => {
         axios.post(`${url}${apiToken}/sendMessage`,
                {
