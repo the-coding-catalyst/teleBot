@@ -107,7 +107,8 @@ const getiPhone14Price = async () => {
     const price = await getiPhone14Price();
     const message = `📱 iPhone14 Price Update 📱\n\nThe latest price is $${price}.`;
 //     console.log(users, "this is users info-----------------------------")
-    subscribers.forEach((chatId) => {
+     for(let idx=0;idx<subscribers.length;idx++){
+          chatId = subscribers[idx]
         axios.post(`${url}${apiToken}/sendMessage`,
                {
                     chat_id: chatId,
@@ -120,7 +121,7 @@ const getiPhone14Price = async () => {
                     // console.log("here3",error)
                     res.send(error);
                });
-    });
+    };
   };
   
   // Set up a daily cron job to send price updates
