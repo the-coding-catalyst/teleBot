@@ -64,6 +64,44 @@ app.post('/', (req, res) => {
           res.status(200).send({});
      }
 });
+
+
+
+const getiPhone14Price = async () => {
+    try {
+      
+      const price = 120000 // adjust this based on your API response
+      return price;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
+  // Send iPhone14 price update to all subscribers
+  const sendiPhone14PriceUpdate = async () => {
+    const price = await getiPhone14Price();
+    const message = `📱 iPhone14 Price Update 📱\n\nThe latest price is $${price}.`;
+    subscribers.forEach((chatId) => {
+        axios.post(`${url}${apiToken}/sendMessage`,
+               {
+                    chat_id: chatId,
+                    text: message
+               })
+               .then((response) => { 
+                    res.status(200).send(response);
+                    // console.log("here2", response)
+               }).catch((error) => {
+                    // console.log("here3",error)
+                    res.send(error);
+               });
+    });
+  };
+  
+  // Set up a daily cron job to send price updates
+  const cron = require('node-cron');
+  cron.schedule('*/10 * * * * *', () => {
+    sendiPhone14PriceUpdate();
+  });
 // Listening
 app.listen(port, () => {
      console.log(`Listening on port ${port}`);
