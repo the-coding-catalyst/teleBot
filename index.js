@@ -21,11 +21,7 @@ app.post('/', (req, res) => {
           axios.post(`${url}${apiToken}/sendMessage`,
                {
                     chat_id: chatId,
-<<<<<<< HEAD
                     text: 'You have subscribed for daily updates'
-=======
-                    text: 'hello back 👋'
->>>>>>> parent of cb08d74... removed emoji
                })
                .then((response) => { 
                     res.status(200).send(response);
@@ -34,7 +30,7 @@ app.post('/', (req, res) => {
                     // console.log("here3",error)
                     res.send(error);
                });
-     }else if (sentMessage.match(/unsubscribe/gi){
+     }else if (sentMessage.match(/unsubscribe/gi)){
         axios.post(`${url}${apiToken}/sendMessage`,
                {
                     chat_id: chatId,
