@@ -38,6 +38,7 @@ app.post('/', async (req, res) => {
      const chatId = req.body.message.chat.id;
      const sentMessage = req.body.message.text;
      // Regex for hello
+     console.log(sentMessage, "this is sent message")
      
      if (sentMessage == "subscribe") {
         var text = ""
