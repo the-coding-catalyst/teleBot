@@ -15,7 +15,7 @@ app.post('/', (req, res) => {
      // Regex for hello
      
      if (sentMessage.match(/hello/gi)) {
-        console.log("here")
+        console.log("here1")
           axios.post(`${url}${apiToken}/sendMessage`,
                {
                     chat_id: chatId,
@@ -23,9 +23,9 @@ app.post('/', (req, res) => {
                })
                .then((response) => { 
                     res.status(200).send(response);
-                    console.log("here", response)
+                    console.log("here2", response)
                }).catch((error) => {
-                    console.log("here",error)
+                    console.log("here3",error)
                     res.send(error);
                });
      } else {
