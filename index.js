@@ -33,7 +33,7 @@ app.post('/', (req, res) => {
      // Regex for hello
      const users = getUsers(chatId)
      const subscribers = users.subscribers
-     if (sentMessage.match(/subscribe/gi)) {
+     if (sentMessage == "subscribe") {
         var text = ""
         if(!subscribers.includes(chatId)){
             text = 'You have subscribed for daily updates'
@@ -57,7 +57,8 @@ app.post('/', (req, res) => {
                     // console.log("here3",error)
                     res.send(error);
                });
-     }else if (sentMessage.match(/unsubscribe/gi)){
+               // sentMessage.match(/unsubscribe/gi)){
+     }else if (sentMessage == "unsubscribe"){
         var text = ""
         if(subscribers.includes(chatId)){
             text = 'You have been unsubscribed'
