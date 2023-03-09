@@ -16,22 +16,22 @@ const User = require('./model/user')
 app.use(bodyParser.json());
 
 const getUsers = async () => {
-    let users
-    try{
-        users = await User.find()
-    }catch(err){
-        console.log(err, "here is error")
-        return res.status(500)
-    }
-    
-    return users
+     const chatIds = [];
+     User.find({}, (err, users) => {
+         if (err) {
+             console.error(err);
+         } else {
+             users.forEach((user) => {
+                 chatIds.push(user.chatId);
+             });
+             console.log(chatIds);
+         }
+     });
+     return chatIds
 }
 // Endpoints
-const users = getUsers()
-var subscribers = []
-users.forEach((user) => {
-     subscribers.push(user.chatId)
-})
+var subscribers = getUsers()
+
 app.post('/', async (req, res) => {
      
      const chatId = req.body.message.chat.id;
