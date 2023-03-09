@@ -13,7 +13,7 @@ app.post('/', (req, res) => {
      const chatId = req.body.message.chat.id;
      const sentMessage = req.body.message.text;
      // Regex for hello
-     console.log("------------------------------");
+     console.log((sentMessage);
      
      if (sentMessage.match(/hello/gi)) {
         console.log("----------")
