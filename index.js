@@ -5,13 +5,8 @@ const bodyParser = require('body-parser');
 const port = 5001;
 const url = 'https://api.telegram.org/bot';
 const apiToken = '5602715484:AAFoeGmUud57haPHYvfKdV8MYvBEmbv88zQ'
-const subscribers = []
+var subscribers = []
 
-mongoose.connect('mongodb+srv://ramit:ramit@cluster0.8fdlu.mongodb.net/Social?retryWrites=true&w=majority', (err)=>{
-    console.log("connected to db") 
-})
-
-const User = require("./model/user")
 // Configurations
 app.use(bodyParser.json());
 // Endpoints
@@ -22,12 +17,19 @@ app.post('/', (req, res) => {
      // Regex for hello
      
      if (sentMessage.match(/subscribe/gi)) {
+        var text = ""
+        if(!subscribers.includes(chatId)){
+            text = 'You have subscribed for daily updates'
+            subscribers.push(chatId)
+        }else{
+            text = "You have already subscribed"
+        }
         
         // console.log("here1")
           axios.post(`${url}${apiToken}/sendMessage`,
                {
                     chat_id: chatId,
-                    text: 'You have subscribed for daily updates'
+                    text: text
                })
                .then((response) => { 
                     res.status(200).send(response);
@@ -37,6 +39,13 @@ app.post('/', (req, res) => {
                     res.send(error);
                });
      }else if (sentMessage.match(/unsubscribe/gi)){
+        var text = ""
+        if(subscribers.includes(chatId)){
+            text = 'You have been unsubscribed'
+            subscribers.pop(chatId)
+        }else{
+            text = "You have not subscribed"
+        }
         axios.post(`${url}${apiToken}/sendMessage`,
                {
                     chat_id: chatId,
