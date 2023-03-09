@@ -27,12 +27,17 @@ const getUsers = async () => {
     return users
 }
 // Endpoints
+const users = getUsers()
+var subscribers = []
+users.forEach((user) => {
+     subscribers.push(user.chatId)
+})
 app.post('/', async (req, res) => {
      
      const chatId = req.body.message.chat.id;
      const sentMessage = req.body.message.text;
      // Regex for hello
-     const users = getUsers()
+     
      console.log(users, "--------------------")
      const subscribers = await users.subscribers
      if (sentMessage == "subscribe") {
@@ -103,8 +108,6 @@ const getiPhone14Price = async () => {
   const sendiPhone14PriceUpdate = async () => {
     const price = await getiPhone14Price();
     const message = `📱 iPhone14 Price Update 📱\n\nThe latest price is $${price}.`;
-    const users = getUsers()
-    const subscribers = users.subscribers
     console.log(users, "this is users info-----------------------------")
     subscribers.forEach((chatId) => {
         axios.post(`${url}${apiToken}/sendMessage`,
