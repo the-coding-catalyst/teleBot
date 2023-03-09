@@ -17,16 +17,16 @@ app.use(bodyParser.json());
 
 const getUsers = async () => {
      const chatIds = [];
-     User.find({}, (err, users) => {
-         if (err) {
-             console.error(err);
-         } else {
-             users.forEach((user) => {
-                 chatIds.push(user.chatId);
-             });
-             console.log(chatIds);
-         }
-     });
+     User.find({})
+    .then((users) => {
+        users.forEach((user) => {
+            chatIds.push(user.chatId);
+        });
+        console.log(chatIds);
+    })
+    .catch((err) => {
+        console.error(err);
+    });
      return chatIds
 }
 // Endpoints
