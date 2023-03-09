@@ -31,7 +31,7 @@ const getUsers = async () => {
      return chatIds
 }
 // Endpoints
-// var subscribers = getUsers()
+var subscribers = getUsers()
 
 app.post('/', async (req, res) => {
      
@@ -45,7 +45,7 @@ app.post('/', async (req, res) => {
         if(!subscribers.includes(chatId)){
             text = 'You have subscribed for daily updates'
             subscribers.push(chatId)
-            users.save()
+          //   users.save()
             
         }else{
             text = "You have already subscribed"
