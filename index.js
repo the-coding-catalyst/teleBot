@@ -88,7 +88,19 @@ app.post('/', (req, res) => {
      }
       else {
           // if no hello present, just respond with 200 
-          res.status(200).send({});
+          text = "Enter subscribe or unsubscribe"
+          axios.post(`${url}${apiToken}/sendMessage`,
+               {
+                    chat_id: chatId,
+                    text: text
+               })
+               .then((response) => { 
+                    res.status(200).send(response);
+                    // console.log("here2", response)
+               }).catch((error) => {
+                    // console.log("here3",error)
+                    res.send(error);
+               });
      }
 });
 
