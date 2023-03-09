@@ -5,22 +5,41 @@ const bodyParser = require('body-parser');
 const port = 5001;
 const url = 'https://api.telegram.org/bot';
 const apiToken = '5602715484:AAFoeGmUud57haPHYvfKdV8MYvBEmbv88zQ'
-var subscribers = []
 
+
+mongoose.connect('mongodb+srv://ramit:ramit@cluster0.8fdlu.mongodb.net/Social?retryWrites=true&w=majority', (err)=>{
+    console.log("connected to db") 
+})
+
+const User = require('./model/user')
 // Configurations
 app.use(bodyParser.json());
+
+const getUsers = async (chatId) => {
+    let users
+    try{
+        users = await User.find()
+    }catch(err){
+        return res.status(500)
+    }
+    
+    return users
+}
 // Endpoints
 app.post('/', (req, res) => {
      
      const chatId = req.body.message.chat.id;
      const sentMessage = req.body.message.text;
      // Regex for hello
-     
+     const users = getUsers(chatId)
+     const subscribers = users.subscribers
      if (sentMessage.match(/subscribe/gi)) {
         var text = ""
         if(!subscribers.includes(chatId)){
             text = 'You have subscribed for daily updates'
             subscribers.push(chatId)
+            users.save()
+            
         }else{
             text = "You have already subscribed"
         }
