@@ -12,28 +12,28 @@ const mongoose = require('mongoose')
 // })
 var subscribers = []
 
-const User = require('./model/user')
+// const User = require('./model/user')
 // Configurations
 app.use(bodyParser.json());
 
-const getUsers = async () => {
-     const chatIds = [];
-     User.find({})
-    .then((users) => {
-        users.forEach((user) => {
-            chatIds.push(user.chatId);
-        });
-        console.log(chatIds);
-    })
-    .catch((err) => {
-        console.error(err);
-    });
-     return chatIds
-}
-// Endpoints
-var subscribers = getUsers()
+// const getUsers = async () => {
+//      const chatIds = [];
+//      User.find({})
+//     .then((users) => {
+//         users.forEach((user) => {
+//             chatIds.push(user.chatId);
+//         });
+//         console.log(chatIds);
+//     })
+//     .catch((err) => {
+//         console.error(err);
+//     });
+//      return chatIds
+// }
+// // Endpoints
+// var subscribers = getUsers()
 
-app.post('/', async (req, res) => {
+app.post('/', (req, res) => {
      
      const chatId = req.body.message.chat.id;
      const sentMessage = req.body.message.text;
