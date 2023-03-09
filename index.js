@@ -7,8 +7,8 @@ const url = 'https://api.telegram.org/bot';
 const apiToken = '5602715484:AAFoeGmUud57haPHYvfKdV8MYvBEmbv88zQ'
 const mongoose = require('mongoose')
 
-mongoose.connect('mongodb+srv://ramit:ramit@cluster0.8fdlu.mongodb.net/Social?retryWrites=true&w=majority', (err)=>{
-    console.log("connected to db") 
+mongoose.connect('mongodb+srv://ramit:ramit@cluster0.8fdlu.mongodb.net/Bot?retryWrites=true&w=majority', (err)=>{
+    console.log("connected to db", err) 
 })
 
 const User = require('./model/user')
