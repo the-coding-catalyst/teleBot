@@ -13,10 +13,9 @@ app.post('/', (req, res) => {
      const chatId = req.body.message.chat.id;
      const sentMessage = req.body.message.text;
      // Regex for hello
-     console.log((sentMessage);
      
      if (sentMessage.match(/hello/gi)) {
-        console.log("----------")
+        console.log("here")
           axios.post(`${url}${apiToken}/sendMessage`,
                {
                     chat_id: chatId,
@@ -24,7 +23,9 @@ app.post('/', (req, res) => {
                })
                .then((response) => { 
                     res.status(200).send(response);
+                    console.log("here", response)
                }).catch((error) => {
+                    console.log("here",error)
                     res.send(error);
                });
      } else {
