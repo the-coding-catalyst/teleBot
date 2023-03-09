@@ -26,14 +26,14 @@ const getUsers = async (chatId) => {
     return users
 }
 // Endpoints
-app.post('/', (req, res) => {
+app.post('/', async (req, res) => {
      
      const chatId = req.body.message.chat.id;
      const sentMessage = req.body.message.text;
      // Regex for hello
      const users = getUsers(chatId)
      console.log(users, "--------------------")
-     const subscribers = users.subscribers
+     const subscribers = await users.subscribers
      if (sentMessage == "subscribe") {
         var text = ""
         if(!subscribers.includes(chatId)){
