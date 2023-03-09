@@ -20,6 +20,7 @@ const getUsers = async (chatId) => {
     try{
         users = await User.find()
     }catch(err){
+        console.log(err, "here is error")
         return res.status(500)
     }
     
