@@ -106,7 +106,7 @@ const getiPhone14Price = async () => {
   const sendiPhone14PriceUpdate = async () => {
     const price = await getiPhone14Price();
     const message = `📱 iPhone14 Price Update 📱\n\nThe latest price is $${price}.`;
-    console.log(users, "this is users info-----------------------------")
+//     console.log(users, "this is users info-----------------------------")
     subscribers.forEach((chatId) => {
         axios.post(`${url}${apiToken}/sendMessage`,
                {
