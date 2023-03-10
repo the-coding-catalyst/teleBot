@@ -35,14 +35,17 @@ app.use(bodyParser.json());
 
 app.post("/desc", (req, res)=>{
      
-     var description = req.body.description
+     const description = req.body.description
+     console.log(req.body, "this is body")
      axios.post(`https://api.telegram.org/bot${apiToken}/setMyBot`, {
      description: description
      })
      .then(response => {
+     return res.status(200).send(response)
      console.log(response.data);
      })
      .catch(error => {
+     return res.send(error)
      console.log(error.response.data);
      });
 })
