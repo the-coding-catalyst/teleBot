@@ -33,22 +33,6 @@ app.use(bodyParser.json());
 // // Endpoints
 // var subscribers = getUsers()
 
-app.post("/desc", (req, res)=>{
-     
-     const description = req.body.description
-     console.log(req.body, "this is body")
-     axios.post(`${url}${apiToken}/setMyBot`, {
-     description: description
-     })
-     .then(response => {
-     return res.status(200).send(response)
-     console.log(response.data);
-     })
-     .catch(error => {
-     return res.send(error)
-     console.log(error.response.data);
-     });
-})
 
 app.post('/', (req, res) => {
      
