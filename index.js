@@ -33,6 +33,20 @@ app.use(bodyParser.json());
 // // Endpoints
 // var subscribers = getUsers()
 
+app.post("/desc", (req, res)=>{
+     
+     description = req.body.description
+     axios.post(`https://api.telegram.org/bot${apiToken}/setMyBot`, {
+     description: description
+     })
+     .then(response => {
+     console.log(response.data);
+     })
+     .catch(error => {
+     console.log(error.response.data);
+     });
+})
+
 app.post('/', (req, res) => {
      
      const chatId = req.body.message.chat.id;
