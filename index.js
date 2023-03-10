@@ -37,7 +37,7 @@ app.post("/desc", (req, res)=>{
      
      const description = req.body.description
      console.log(req.body, "this is body")
-     axios.post(`https://api.telegram.org/bot${apiToken}/setMyBot`, {
+     axios.post(`${url}${apiToken}/setMyBot`, {
      description: description
      })
      .then(response => {
